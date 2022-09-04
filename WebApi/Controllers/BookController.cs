@@ -7,9 +7,9 @@ namespace WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]s")]
-    public class BookController: ControllerBase
+    public class BookController : ControllerBase
     {
-        private static List<Book> BookList=new List<Book>()
+        private static List<Book> BookList = new List<Book>()
         {
             new Book{
                 Id=1,
@@ -37,22 +37,22 @@ namespace WebApi.Controllers
         [HttpGet]
         public List<Book> GetBooks()
         {
-            var bookList=BookList.OrderBy(x=> x.Id).ToList();
+            var bookList = BookList.OrderBy(x => x.Id).ToList();
             return bookList;
         }
 
         [HttpGet("{id}")]
         public Book GetById(int id)
         {
-            var book = BookList.Where(book => book.Id==id).SingleOrDefault();
+            var book = BookList.Where(book => book.Id == id).SingleOrDefault();
             return book;
         }
-       
+
         [HttpPost]
         public IActionResult AddBook([FromBody] Book book)
         {
             var _book = BookList.SingleOrDefault(x => x.Title == book.Title);
-            if(_book is not null)
+            if (_book is not null)
             {
                 return BadRequest();
             }
@@ -61,34 +61,45 @@ namespace WebApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateBook(int id,[FromBody] Book book)
+        public IActionResult UpdateBook(int id, [FromBody] Book book)
         {
-            var _book =BookList.SingleOrDefault(x=> x.Id == id);
+            var _book = BookList.SingleOrDefault(x => x.Id == id);
             if (_book is null)
             {
                 return BadRequest();
             }
-            _book.GenreId       = book.GenreId      != default ? book.GenreId       : _book.GenreId;
-            _book.Title         = book.Title        != default ? book.Title         : _book.Title;
-            _book.PageCount     = book.PageCount    != default ? book.PageCount     : _book.PageCount;
-            _book.PublishDate   = book.PublishDate  != default ? book.PublishDate   : _book.PublishDate;
-            
+            _book.GenreId = book.GenreId != default ? book.GenreId : _book.GenreId;
+            _book.Title = book.Title != default ? book.Title : _book.Title;
+            _book.PageCount = book.PageCount != default ? book.PageCount : _book.PageCount;
+            _book.PublishDate = book.PublishDate != default ? book.PublishDate : _book.PublishDate;
+
             return Ok();
         }
-      
-
-         /* [HttpGet]
-        public Book Get([FromQuery] string id)
+        [HttpDelete("{id}")]
+        public IActionResult DeleteBook(int id)
         {
-            var book = BookList.Where(book => book.Id==Convert.ToInt32(id)).SingleOrDefault();
-            return book;
-        } */
+            var _book = BookList.SingleOrDefault(x => x.Id == id);
+            if (_book is null)
+            {
+                return BadRequest();
+            }
+            BookList.Remove(_book);
+            return Ok();
+        }
 
-         /*  [HttpGet("pageCountGreaterThanOrEqualTo/{pageCount}")]
-        public List<Book> GetByPageCountGreaterThanOrEqualTo(int pageCount)
-        {
-            var book = BookList.Where(book=> book.PageCount>=pageCount).ToList();
-            return book;
-        } */
+
+        /* [HttpGet]
+       public Book Get([FromQuery] string id)
+       {
+           var book = BookList.Where(book => book.Id==Convert.ToInt32(id)).SingleOrDefault();
+           return book;
+       } */
+
+        /*  [HttpGet("pageCountGreaterThanOrEqualTo/{pageCount}")]
+       public List<Book> GetByPageCountGreaterThanOrEqualTo(int pageCount)
+       {
+           var book = BookList.Where(book=> book.PageCount>=pageCount).ToList();
+           return book;
+       } */
     }
 }
