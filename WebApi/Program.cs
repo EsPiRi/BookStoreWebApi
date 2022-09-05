@@ -15,10 +15,10 @@ namespace WebApi
     {
         public static void Main(string[] args)
         {
-            var host=CreateHostBuilder(args).Build();
-            using(var scope=host.Services.CreateScope())
+            var host = CreateHostBuilder(args).Build();
+            using (var scope = host.Services.CreateScope())
             {
-                var services=scope.ServiceProvider;
+                var services = scope.ServiceProvider;
                 DataGenerator.Initialize(services);
             }
             host.Run();

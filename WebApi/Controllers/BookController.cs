@@ -11,10 +11,10 @@ namespace WebApi.Controllers
     public class BookController : ControllerBase
     {
         private readonly BookStoreDbContext _context;
-        public BookController (BookStoreDbContext context)
+        public BookController(BookStoreDbContext context)
         {
-            _context=context;
-        }        
+            _context = context;
+        }
 
         [HttpGet]
         public List<Book> GetBooks()
