@@ -35,16 +35,13 @@ namespace WebApi.Controllers
             {
                 Model.Id = id;
                 query.Model = Model;
-                var result = query.Handle();
+                Model = query.Handle();
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-            return Ok(query.Model);
-
-            // var book = _context.Books.Where(book => book.Id == id).SingleOrDefault();
-            // return book;
+            return Ok(Model);
         }
 
         [HttpPost]
