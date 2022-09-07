@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Linq;
 using System;
 using WebApi.DBOperations;
+using WebApi.BookOperations.GetBooks;
+using WebApi.BookOperations.CreateBook;
+using WebApi.BookOperations.UpdateBook;
 
 namespace WebApi.Controllers
 {
@@ -17,46 +19,67 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public List<Book> GetBooks()
+        public IActionResult GetBooks()
         {
-            var bookList = _context.Books.OrderBy(x => x.Id).ToList();
-            return bookList;
+            GetBooksQuery query = new GetBooksQuery(_context);
+            var result = query.Handle();
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public Book GetById(int id)
+        public IActionResult GetById(int id)
         {
-            var book = _context.Books.Where(book => book.Id == id).SingleOrDefault();
-            return book;
+            GetBookByIdQuery query = new GetBookByIdQuery(_context);
+            BookViewModel Model = new BookViewModel();
+            try
+            {
+                Model.Id = id;
+                query.Model = Model;
+                var result = query.Handle();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            return Ok(query.Model);
+
+            // var book = _context.Books.Where(book => book.Id == id).SingleOrDefault();
+            // return book;
         }
 
         [HttpPost]
-        public IActionResult AddBook([FromBody] Book book)
+        public IActionResult AddBook([FromBody] CreateBookModel bookModel)
         {
-            var _book = _context.Books.SingleOrDefault(x => x.Title == book.Title);
-            if (_book is not null)
+            CreateBookCommand command = new CreateBookCommand(_context);
+            try
             {
-                return BadRequest();
+                command.Model = bookModel;
+                command.Handle();
             }
-            _context.Books.Add(book);
-            _context.SaveChanges();
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
             return Ok();
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateBook(int id, [FromBody] Book book)
+        public IActionResult UpdateBook(int id, [FromBody] UpdateBookViewModel bookModel)
         {
-            var _book = _context.Books.SingleOrDefault(x => x.Id == id);
-            if (_book is null)
+            UpdateBookCommand command = new UpdateBookCommand(_context);
+            UpdateBookViewModel model;
+            try
             {
-                return BadRequest();
+                command.ModelId = id;
+                command.Model = bookModel;
+                model = command.Handle();
             }
-            _book.GenreId = book.GenreId != default ? book.GenreId : _book.GenreId;
-            _book.Title = book.Title != default ? book.Title : _book.Title;
-            _book.PageCount = book.PageCount != default ? book.PageCount : _book.PageCount;
-            _book.PublishDate = book.PublishDate != default ? book.PublishDate : _book.PublishDate;
-            _context.SaveChanges();
-            return Ok();
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            return Ok(model);
         }
         [HttpDelete("{id}")]
         public IActionResult DeleteBook(int id)
@@ -70,20 +93,5 @@ namespace WebApi.Controllers
             _context.SaveChanges();
             return Ok();
         }
-
-
-        /* [HttpGet]
-       public Book Get([FromQuery] string id)
-       {
-           var book = BookList.Where(book => book.Id==Convert.ToInt32(id)).SingleOrDefault();
-           return book;
-       } */
-
-        /*  [HttpGet("pageCountGreaterThanOrEqualTo/{pageCount}")]
-       public List<Book> GetByPageCountGreaterThanOrEqualTo(int pageCount)
-       {
-           var book = BookList.Where(book=> book.PageCount>=pageCount).ToList();
-           return book;
-       } */
     }
 }
