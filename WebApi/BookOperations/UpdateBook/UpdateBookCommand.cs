@@ -8,7 +8,7 @@ namespace WebApi.BookOperations.UpdateBook
 
     public class UpdateBookCommand
     {
-        public int ModelId;
+        public int ModelId { get; set; }
         public UpdateBookViewModel Model { get; set; }
         private readonly BookStoreDbContext _dbContext;
         public UpdateBookCommand(BookStoreDbContext dbContext)
@@ -29,13 +29,13 @@ namespace WebApi.BookOperations.UpdateBook
             _book.Title = Model.Title != default ? Model.Title : _book.Title;
             _book.PageCount = Model.PageCount != default ? Model.PageCount : _book.PageCount;
             _book.PublishDate = Model.PublishDate != default ? Model.PublishDate : _book.PublishDate;
-            _dbContext.SaveChanges(); 
+            _dbContext.SaveChanges();
             return Model;
         }
 
     }
     public class UpdateBookViewModel
-    {        
+    {
         public string Title { get; set; }
         public int GenreId { get; set; }
         public int PageCount { get; set; }
