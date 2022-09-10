@@ -6,6 +6,7 @@ using WebApi.BookOperations.GetBooks;
 using WebApi.BookOperations.CreateBook;
 using WebApi.BookOperations.UpdateBook;
 using WebApi.BookOperations.DeleteBook;
+using AutoMapper;
 
 namespace WebApi.Controllers
 {
@@ -14,15 +15,17 @@ namespace WebApi.Controllers
     public class BookController : ControllerBase
     {
         private readonly BookStoreDbContext _context;
-        public BookController(BookStoreDbContext context)
+        private readonly IMapper _mapper;
+        public BookController(BookStoreDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult GetBooks()
         {
-            GetBooksQuery query = new GetBooksQuery(_context);
+            GetBooksQuery query = new GetBooksQuery(_context,_mapper);
             var result = query.Handle();
             return Ok(result);
         }
@@ -30,11 +33,11 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            GetBookByIdQuery query = new GetBookByIdQuery(_context);
+            GetBookByIdQuery query = new GetBookByIdQuery(_context,_mapper);
             BookViewModel result;
             try
             {
-                query.BookId = id;                
+                query.BookId = id;
                 result = query.Handle();
             }
             catch (Exception ex)
@@ -47,7 +50,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public IActionResult AddBook([FromBody] CreateBookModel bookModel)
         {
-            CreateBookCommand command = new CreateBookCommand(_context);
+            CreateBookCommand command = new CreateBookCommand(_context,_mapper);
             try
             {
                 command.Model = bookModel;
@@ -58,7 +61,7 @@ namespace WebApi.Controllers
                 return BadRequest(ex.Message);
             }
 
-            return Ok(); 
+            return Ok();
         }
 
         [HttpPut("{id}")]
@@ -81,16 +84,17 @@ namespace WebApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteBook(int id)
         {
-            DeleteBookCommand command=new DeleteBookCommand(_context);
-            command.BookId=id;
-            try{
+            DeleteBookCommand command = new DeleteBookCommand(_context);
+            command.BookId = id;
+            try
+            {
                 command.Handle();
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-            return Ok();            
+            return Ok();
         }
     }
 }
