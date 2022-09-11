@@ -23,16 +23,13 @@ namespace WebApi.BookOperations.UpdateBook
         public UpdateBookViewModel Handle()
         {
             var _book = _dbContext.Books.SingleOrDefault(x => x.Id == BookId);
-            //UpdateBookViewModel vm = new UpdateBookViewModel();
+            
             if (_book is null)
             {
                 throw new InvalidOperationException("Güncellemek istediğiniz kitap mevcut değil");
             } 
             _mapper.Map<UpdateBookViewModel,Book>(Model,_book);     
-            // _book.GenreId = Model.GenreId != default ? Model.GenreId : _book.GenreId;
-            // _book.Title = Model.Title != default ? Model.Title : _book.Title;
-            // _book.PageCount = Model.PageCount != default ? Model.PageCount : _book.PageCount;
-            //_book.PublishDate = Model.PublishDate != default ? Model.PublishDate : _book.PublishDate;
+            
             _dbContext.SaveChanges();
             return Model;
         }
