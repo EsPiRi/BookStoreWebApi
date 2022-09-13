@@ -6,7 +6,7 @@ namespace WebApi.BookOperations.GetBooks
     {
         public GetBookByIdQueryValidator()
         {
-            RuleFor(query => query.BookId).NotEmpty().GreaterThan(0);
+            RuleFor(query => query.BookId).NotEmpty().GreaterThan(0).WithMessage("Id 0'dan büyük olmalıdır");
         }
     }
 }
