@@ -36,9 +36,12 @@ namespace WebApi.Controllers
         {
             GetBookByIdQuery query = new GetBookByIdQuery(_context, _mapper);
             BookViewModel result;
+            GetBookByIdQueryValidator validator=new GetBookByIdQueryValidator();          
+            
             try
             {
                 query.BookId = id;
+                validator.ValidateAndThrow(query);
                 result = query.Handle();
             }
             catch (Exception ex)
@@ -57,21 +60,7 @@ namespace WebApi.Controllers
                 command.Model = bookModel;
                 CreateBookCommandValidator validator = new CreateBookCommandValidator();
                 validator.ValidateAndThrow(command);
-                command.Handle();
-                // if (!result.IsValid)
-                // {
-                //     foreach (var failure in result.Errors)
-                //     {
-                //         Console.WriteLine("Property failure: " + failure.PropertyName + " Error Message: " + failure.ErrorMessage);
-                        
-                //     }
-                //     return BadRequest(result.Errors);
-                // }
-                // else
-                // {
-                //     command.Handle();
-                // }
-
+                command.Handle(); 
             }
             catch (Exception ex)
             {
@@ -86,10 +75,13 @@ namespace WebApi.Controllers
         {
             UpdateBookCommand command = new UpdateBookCommand(_context, _mapper);
             UpdateBookViewModel model;
+            UpdateBookCommandValidator validator=new UpdateBookCommandValidator();
+
             try
             {
                 command.BookId = id;
                 command.Model = bookModel;
+                validator.ValidateAndThrow(command);
                 model = command.Handle();
             }
             catch (Exception ex)
