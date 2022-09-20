@@ -13,14 +13,14 @@ namespace WebApi.BookOperations.DeleteBook
             _dbContext = dbContext;
         }
         public void Handle()
-        {
+        {   
             var _book = _dbContext.Books.SingleOrDefault(x => x.Id == BookId);            
             if (_book is null)
             {
                 throw new InvalidOperationException("Kitap mevcut değil!");
             }
             _dbContext.Books.Remove(_book);
-            _dbContext.SaveChanges();
+            _dbContext.SaveChanges();            
         }
     }
 }
