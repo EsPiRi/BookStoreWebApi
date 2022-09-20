@@ -22,7 +22,7 @@ namespace WebApi.BookOperations.GetBooks
         public BookViewModel Handle()
         {
             var book = _dbContext.Books.Where(book => book.Id == BookId).SingleOrDefault();
-            
+
             if (book is null)
             {
                 throw new InvalidOperationException("Kitap mevcut değil");

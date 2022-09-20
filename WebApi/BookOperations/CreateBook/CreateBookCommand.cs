@@ -23,7 +23,7 @@ namespace WebApi.BookOperations.CreateBook
             {
                 throw new InvalidOperationException("Kitap zaten mevcut");
             }
-            book = _mapper.Map<Book>(Model);           
+            book = _mapper.Map<Book>(Model);
 
             _dbContext.Books.Add(book);
             _dbContext.SaveChanges();

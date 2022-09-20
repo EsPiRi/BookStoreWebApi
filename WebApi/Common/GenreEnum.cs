@@ -1,8 +1,9 @@
-namespace WebApi.Common{
+namespace WebApi.Common
+{
     public enum GenreEnum
     {
-PersonalGrowth=1,
-ScienceFiction,
-Novel
+        PersonalGrowth = 1,
+        ScienceFiction,
+        Novel
     }
 }

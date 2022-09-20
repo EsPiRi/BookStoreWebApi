@@ -23,13 +23,13 @@ namespace WebApi.BookOperations.UpdateBook
         public UpdateBookViewModel Handle()
         {
             var _book = _dbContext.Books.SingleOrDefault(x => x.Id == BookId);
-            
+
             if (_book is null)
             {
                 throw new InvalidOperationException("Güncellemek istediğiniz kitap mevcut değil");
-            } 
-            _mapper.Map<UpdateBookViewModel,Book>(Model,_book);     
-            
+            }
+            _mapper.Map<UpdateBookViewModel, Book>(Model, _book);
+
             _dbContext.SaveChanges();
             return Model;
         }

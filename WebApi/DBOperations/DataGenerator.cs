@@ -34,7 +34,7 @@ namespace WebApi.DBOperations
                     new Book
                     {
                         Title = "Kitap3",
-                        GenreId = 3, 
+                        GenreId = 3,
                         PageCount = 500,
                         PublishDate = new System.DateTime(2006, 7, 10)
                     }
