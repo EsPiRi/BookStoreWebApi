@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using System;
 using WebApi.DBOperations;
 using WebApi.Application.BookOperations.GetBooks;
 using WebApi.Application.BookOperations.CreateBook;
