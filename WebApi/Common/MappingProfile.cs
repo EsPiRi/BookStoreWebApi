@@ -1,7 +1,8 @@
 using AutoMapper;
-using WebApi.BookOperations.CreateBook;
-using WebApi.BookOperations.GetBooks;
-using WebApi.BookOperations.UpdateBook;
+using WebApi.Application.BookOperations.CreateBook;
+using WebApi.Application.BookOperations.GetBooks;
+using WebApi.Application.BookOperations.UpdateBook;
+using WebApi.Entities;
 
 namespace WebApi.Common
 {
@@ -15,7 +16,7 @@ namespace WebApi.Common
             /*CreateMap<UpdateBookViewModel, Book>().ForMember(dest => dest.GenreId, opt => opt.MapFrom(src => src.GenreId))
                                                   .ForMember(dest => dest.PageCount, opt => opt.MapFrom(src => src.PageCount))
                                                   .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title)); */
-            CreateMap<UpdateBookViewModel, Book>();
+            CreateMap<UpdateBookCommand, Book>();
 
         }
     }

@@ -1,10 +1,9 @@
 using System;
 using System.Linq;
 using AutoMapper;
-using WebApi.Common;
 using WebApi.DBOperations;
 
-namespace WebApi.BookOperations.GetBooks
+namespace WebApi.Application.BookOperations.GetBooks
 {
     public class GetBookByIdQuery
     {
