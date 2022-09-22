@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using WebApi.DBOperations;
 using WebApi.Entities;
 
@@ -22,8 +23,13 @@ namespace WebApi.Application.GenreOperations.Commands.DeleteGenre
             {
                 throw new InvalidOperationException("Silinmek istenen kitap türü mevcut değil!");
             }
+            var book = _context.Books.Include(x => x.Genre).SingleOrDefault(x => x.GenreId == genre.Id);
+            if (book is not null)
+            {
+                throw new InvalidOperationException("Silinmek istenen kitap türüne ait en az bir kitap bulunmaktadır. Tür silinemez!");
+            }
             _context.Genres.Remove(genre);
             _context.SaveChanges();
         }
-    }  
+    }
 }
