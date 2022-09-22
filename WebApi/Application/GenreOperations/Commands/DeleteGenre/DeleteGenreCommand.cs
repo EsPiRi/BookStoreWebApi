@@ -23,10 +23,15 @@ namespace WebApi.Application.GenreOperations.Commands.DeleteGenre
             {
                 throw new InvalidOperationException("Silinmek istenen kitap türü mevcut değil!");
             }
-            var book = _context.Books.Include(x => x.Genre).SingleOrDefault(x => x.GenreId == genre.Id);
+            var book = _context.Books.Include(x => x.Genre).FirstOrDefault(x => x.GenreId == GenreId);
             if (book is not null)
             {
                 throw new InvalidOperationException("Silinmek istenen kitap türüne ait en az bir kitap bulunmaktadır. Tür silinemez!");
+            }
+            var author = _context.Authors.FirstOrDefault(x => x.GenreId == GenreId);
+            if (author is not null)
+            {
+                throw new InvalidOperationException("Silinmek istenen kitap türüne ait en az bir yazar bulunmaktadır. Tür silinemez!");
             }
             _context.Genres.Remove(genre);
             _context.SaveChanges();

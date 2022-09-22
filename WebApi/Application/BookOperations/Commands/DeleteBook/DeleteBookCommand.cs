@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using WebApi.DBOperations;
 
 namespace WebApi.Application.BookOperations.Commands.DeleteBook
@@ -18,7 +19,8 @@ namespace WebApi.Application.BookOperations.Commands.DeleteBook
             if (_book is null)
             {
                 throw new InvalidOperationException("Kitap mevcut değil!");
-            }
+            }           
+            
             _dbContext.Books.Remove(_book);
             _dbContext.SaveChanges();
         }
