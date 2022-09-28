@@ -7,7 +7,7 @@ namespace WebApi.Application.BookOperations.Commands.DeleteBook
 {
     public class DeleteBookCommandValidator : AbstractValidator<DeleteBookCommand>
     {
-        public DeleteBookCommandValidator(BookStoreDbContext context)
+        public DeleteBookCommandValidator(IBookStoreDbContext context)
         {
             if (context.Books.ToList().Count > 0)
             {
