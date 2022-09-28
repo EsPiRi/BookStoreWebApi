@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using AutoMapper;
 using WebApi.DBOperations;
 
 namespace WebApi.Application.GenreOperations.Commands.UpdateGenre

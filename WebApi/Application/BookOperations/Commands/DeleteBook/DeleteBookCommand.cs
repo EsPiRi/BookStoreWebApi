@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using WebApi.DBOperations;
 
 namespace WebApi.Application.BookOperations.Commands.DeleteBook

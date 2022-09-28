@@ -4,7 +4,6 @@ using System.Linq;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using WebApi.DBOperations;
-using WebApi.Entities;
 
 namespace WebApi.Application.AuthorOperations.Queries.GetAuthors
 {

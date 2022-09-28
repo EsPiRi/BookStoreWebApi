@@ -1,5 +1,3 @@
-using System;
-using System.Data;
 using FluentValidation;
 
 namespace WebApi.Application.AuthorOperations.Commands.CreateAuthor

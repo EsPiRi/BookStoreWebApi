@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using WebApi.DBOperations;
 using WebApi.Entities;
 

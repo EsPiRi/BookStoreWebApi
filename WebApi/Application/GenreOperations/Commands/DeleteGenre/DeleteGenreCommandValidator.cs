@@ -1,7 +1,4 @@
-using System.Linq;
 using FluentValidation;
-using Microsoft.EntityFrameworkCore;
-using WebApi.DBOperations;
 
 namespace WebApi.Application.GenreOperations.Commands.DeleteGenre
 {
