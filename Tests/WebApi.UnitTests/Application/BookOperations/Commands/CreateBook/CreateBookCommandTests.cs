@@ -21,12 +21,12 @@ namespace Application.BookOperations.Commands.CreateBook
             _mapper = textFixture.Mapper;
         }
         [Fact]
-        public void WhenAlreadyExistBookTitleIsGiven_CreateBookCommand_ShouldReturnInvalidOperationException()
+        public void WhenAlreadyExistBookTitleIsGiven_CreateBookCommand_ShouldThrowInvalidOperationException()
         {
             //arrange {Hazırlık}
             var book = new Book()
             {
-                Title = "Test_WhenAlreadyExistBookTitleIsGiven_CreateBookCommand_ShouldReturnInvalidOperationException",
+                Title = "Test_WhenAlreadyExistBookTitleIsGiven_CreateBookCommand_ShouldThrowInvalidOperationException",
                 PageCount = 100,
                 PublishDate = new DateTime(1990, 01, 10),
                 GenreId = 1,
@@ -49,7 +49,7 @@ namespace Application.BookOperations.Commands.CreateBook
         }
 
         [Fact]
-        public void WhenValidInputsAreGiven_CreateBookCommand_ShouldCreateABook()
+        public void WhenValidInputsAreGiven_CreateBookCommand_ShouldCreateTheBook()
         {
             //arrange
             CreateBookCommand command = new CreateBookCommand(_context, _mapper);
