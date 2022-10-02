@@ -3,7 +3,7 @@ using TestSetup;
 using WebApi.Application.GenreOperations.Commands.CreateGenre;
 using Xunit;
 
-namespace Application.BookOperations.Commands.CreateGenre
+namespace Application.GenreOperations.Commands.CreateGenre
 {
     public class CreateGenreCommandValidatorTests : IClassFixture<CommonTextFixture>
     {

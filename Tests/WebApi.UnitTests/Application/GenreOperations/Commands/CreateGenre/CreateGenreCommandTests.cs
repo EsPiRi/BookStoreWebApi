@@ -8,7 +8,7 @@ using WebApi.DBOperations;
 using WebApi.Entities;
 using Xunit;
 
-namespace Application.BookOperations.Commands.CreateGenre
+namespace Application.GenreOperations.Commands.CreateGenre
 {
     public class CreateGenreCommandTests : IClassFixture<CommonTextFixture>
     {

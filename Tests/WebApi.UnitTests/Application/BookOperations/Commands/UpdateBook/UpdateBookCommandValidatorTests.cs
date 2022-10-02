@@ -7,7 +7,7 @@ namespace Application.BookOperations.Commands.UpdateBook
 {
     public class UpdateBookCommandValidatorTests : IClassFixture<CommonTextFixture>
     {
-         [Fact]
+        [Fact]
         public void WhenBookIdIsNotValid_UpdateBookCommandValidator_ShouldReturnError()
         {
             UpdateBookCommand command = new UpdateBookCommand(null, null);
@@ -15,9 +15,9 @@ namespace Application.BookOperations.Commands.UpdateBook
             UpdateBookViewModel model = new UpdateBookViewModel()
             {
                 Title = "asdf",
-                AuthorId=1,
-                GenreId=1,
-                PageCount=100
+                AuthorId = 1,
+                GenreId = 1,
+                PageCount = 100
             };
             command.Model = model;
             command.BookId = 0;
@@ -39,24 +39,24 @@ namespace Application.BookOperations.Commands.UpdateBook
             result.Errors.Count.Should().BeGreaterThan(0);
         }
 
-         [Fact]
+        [Fact]
         public void WhenGenreIdIsNotValid_UpdateBookCommandValidator_ShouldReturnError()
         {
             UpdateBookCommand command = new UpdateBookCommand(null, null);
             UpdateBookCommandValidator validator = new UpdateBookCommandValidator();
-           UpdateBookViewModel model = new UpdateBookViewModel()
+            UpdateBookViewModel model = new UpdateBookViewModel()
             {
                 Title = "asdf",
-                AuthorId=1,
-                GenreId=0,
-                PageCount=100
+                AuthorId = 1,
+                GenreId = 0,
+                PageCount = 100
             };
             command.Model = model;
             command.BookId = 1;
             var result = validator.Validate(command);
             result.Errors.Count.Should().BeGreaterThan(0);
         }
-         [Fact]
+        [Fact]
         public void WhenPageCountIsNotValid_UpdateBookCommandValidator_ShouldReturnError()
         {
             UpdateBookCommand command = new UpdateBookCommand(null, null);
@@ -64,16 +64,16 @@ namespace Application.BookOperations.Commands.UpdateBook
             UpdateBookViewModel model = new UpdateBookViewModel()
             {
                 Title = "asdf",
-                AuthorId=1,
-                GenreId=1,
-                PageCount=-1
+                AuthorId = 1,
+                GenreId = 1,
+                PageCount = -1
             };
             command.Model = model;
             command.BookId = 1;
             var result = validator.Validate(command);
             result.Errors.Count.Should().BeGreaterThan(0);
         }
-         [Fact]
+        [Fact]
         public void WhenAuthorIdIsNotValid_UpdateBookCommandValidator_ShouldReturnError()
         {
             UpdateBookCommand command = new UpdateBookCommand(null, null);
@@ -81,9 +81,9 @@ namespace Application.BookOperations.Commands.UpdateBook
             UpdateBookViewModel model = new UpdateBookViewModel()
             {
                 Title = "asdf",
-                AuthorId=-1,
-                GenreId=1,
-                PageCount=100
+                AuthorId = -1,
+                GenreId = 1,
+                PageCount = 100
             };
             command.Model = model;
             command.BookId = 1;
@@ -91,7 +91,7 @@ namespace Application.BookOperations.Commands.UpdateBook
             result.Errors.Count.Should().BeGreaterThan(0);
         }
 
-         [Fact]
+        [Fact]
         public void WhenBookInfoIsValid_UpdateBookCommandValidator_ShouldNotReturnError()
         {
             UpdateBookCommand command = new UpdateBookCommand(null, null);
@@ -99,9 +99,9 @@ namespace Application.BookOperations.Commands.UpdateBook
             UpdateBookViewModel model = new UpdateBookViewModel()
             {
                 Title = "asdf",
-                AuthorId=1,
-                GenreId=1,
-                PageCount=100
+                AuthorId = 1,
+                GenreId = 1,
+                PageCount = 100
             };
             command.Model = model;
             command.BookId = 1;
