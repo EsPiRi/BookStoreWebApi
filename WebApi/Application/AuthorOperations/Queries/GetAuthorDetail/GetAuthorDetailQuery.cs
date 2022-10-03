@@ -10,7 +10,7 @@ namespace WebApi.Application.AuthorOperations.Queries.GetAuthorDetail
     {
         private readonly IBookStoreDbContext _context;
         private readonly IMapper _mapper;
-        public int AuthorId { get; set; }        
+        public int AuthorId { get; set; }
 
         public GetAuthorDetailQuery(IBookStoreDbContext context, IMapper mapper)
         {
@@ -20,7 +20,7 @@ namespace WebApi.Application.AuthorOperations.Queries.GetAuthorDetail
 
         public AuthorDetailViewModel Handle()
         {
-            var author = _context.Authors.Include(x=>x.Genre).SingleOrDefault(x => x.Id == AuthorId);
+            var author = _context.Authors.Include(x => x.Genre).SingleOrDefault(x => x.Id == AuthorId);
             if (author is null)
             {
                 throw new InvalidOperationException("Aranılan yazar bulunmamaktadır");

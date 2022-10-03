@@ -23,7 +23,7 @@ namespace Application.BookOperations.Queries.GetBookDetails
         public void WhenInvalidBookIdIsGiven_GetBookDetailQuery_ShouldThrowInvalidOperationException()
         {
             GetBookByIdQuery query = new GetBookByIdQuery(_context, _mapper);
-            query.BookId = 6;
+            query.BookId = 66;
             FluentActions.Invoking(() => query.Handle()).Should().Throw<InvalidOperationException>().And.Message.Should().Be("Kitap mevcut değil");
         }
         [Fact]
