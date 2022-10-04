@@ -11,6 +11,7 @@ using WebApi.Application.AuthorOperations.Commands.UpdateAuthor;
 using WebApi.Application.AuthorOperations.Queries.GetAuthors;
 using WebApi.Application.AuthorOperations.Queries.GetAuthorDetail;
 using WebApi.Application.GenreOperations.Commands.UpdateGenre;
+using WebApi.Application.UserOperations.Commands.CreateUser;
 
 namespace WebApi.Common
 {
@@ -37,7 +38,7 @@ namespace WebApi.Common
             CreateMap<UpdateAuthorModel, Author>();
             CreateMap<Author, AuthorsViewModel>().ForMember(dest => dest.Genre, opt => opt.MapFrom(src => src.Genre.Name));
             CreateMap<Author, AuthorDetailViewModel>().ForMember(dest => dest.Genre, opt => opt.MapFrom(src => src.Genre.Name));
-
+            CreateMap<CreateUserModel, User>();
         }
     }
 }
