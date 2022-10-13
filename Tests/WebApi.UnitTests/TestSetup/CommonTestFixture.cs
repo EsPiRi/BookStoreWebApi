@@ -18,6 +18,7 @@ namespace TestSetup
             Context.AddBooks();
             Context.AddGenres();
             Context.AddAuthors();
+            Context.AddUsers();
             Context.SaveChanges();
 
             Mapper = new MapperConfiguration(config => { config.AddProfile<MappingProfile>(); }).CreateMapper();
