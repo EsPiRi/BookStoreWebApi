@@ -27,7 +27,7 @@ namespace TestSetup
                                 {
                                     Name = "Sami",
                                     Surname = "Sezgin",
-                                    DateOfBirth = new DateTime(1994, 04, 17),
+                                    DateOfBirth = new DateTime(2000, 01, 01),
                                     GenreId = 3
                                 }
                             );
